@@ -1,0 +1,34 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>NodeJS</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body><div class="main"><div class="tree">
+<p><strong>Index</strong></p>
+<p><a href="Jenkins_Workshop_2.html">Jenkins Workshop 2</a></p>
+
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkins.html">Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Docker.html">Installation - Docker</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Apt.html">Installation - Apt</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Jar.html">Installation - Jar</a></li>
+<li><a href="Jenkins_Workshop_2--Welcome_To_Jenkins.html">Welcome To Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--NodeJS.html">NodeJS</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner.html">Jenkinsfile-runner</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--main.yml.html">main.yml</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--Jenkinsfile.html">Jenkinsfile</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--django.html">django</a></li>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions.html">nodejs - GitHub Actions</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions--node.js.yml.html">node.js.yml</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--PHP.html">PHP</a></li>
+<li><a href="Jenkins_Workshop_2--Building_Docker_Image.html">Building Docker Image</a></li>
+<li><a href="Jenkins_Workshop_2--References.html">References</a></li>
+</ol></div>
+<div class="page"><h1><b><u>NodeJS</u></b></h1><img src="images/79-1.png" alt="images/79-1.png" /><br /><br />Click on Download now and Install after Restart<br /><br /><br /><strong>Configuring NodeJS</strong><br /><br />Manage Jenkins &gt; Global Tool Configuration &gt; NodeJS <br /><br /><br /><img src="images/79-2.png" alt="images/79-2.png" /><br /><br /><br />Select Node Version and Add any global packages you need<br /><br /><img src="images/79-3.png" alt="images/79-3.png" /><br /><br /><em><strong>Project Type: Pipeline</strong></em><br /><br /><img src="images/79-4.png" alt="images/79-4.png" /><br /><br /><strong>Pipeline Example</strong><br /><br />    pipeline {<br />      agent any<br />     <br />      tools {nodejs "node"}<br />     <br />      stages {<br />        stage('Example') {<br />          steps {<br />            sh 'npm config ls'<br />          }<br />        }<br />      }<br />    }<br /><br /><br /><strong>Explanation</strong><br /><br />1. <em>agent any</em><br />    • The job will run in any jenkins agent.<br />    • You can have a lot of jenkins nodes, one master and some slaves, and the job will run in any node.<br /><br />2. <em>tools {nodejs "node"}</em><br />    • This line search for nodejs tool named “node” and use it in pipeline.<br /><br />3. <em>stages {</em><br />     • Stages is the inicialization from pipeline steps.<br /> <br />4. <em>stage('Example') {<br />          steps {<br />                ...<br />          }<br />      }</em><br />    <br />   • This commands start a new stage named “Example” and run the steps inside this stage.<br /><br />5. <em>sh 'npm config ls'</em><br />    • It execute a sh script in machine. With this, we can test the npm running correctly.<br /><br /><br /><strong>Example 2 : Cloning an Application</strong><br /><br />pipeline {<br />  agent any<br />    <br />  stages {    <br />    stage('Cloning Git') {<br />      steps {<br />        git 'https://github.com/miteshgoplani/jenkinsNodeTest.git'<br />      }<br />    }<br />  }     <br />}<br /><br /><strong>Clone and Run Test</strong><br /><br />pipeline {<br />  agent any<br />    <br />  tools {nodejs "node"}<br />    <br />  stages {<br />        <br />    stage('Cloning Git') {<br />      steps {<br />         git 'https://github.com/miteshgoplani/jenkinsNodeTest.git'<br />      }<br />    }<br />        <br />    stage('Install dependencies') {<br />      steps {<br />        sh 'npm install'<br />      }<br />    }<br />     <br />    stage('Test') {<br />      steps {<br />         sh 'npm test'<br />      }<br />    }      <br />  }<br />}<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></div></div>
+</body></html>

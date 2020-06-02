@@ -1,0 +1,34 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>node.js.yml</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body><div class="main"><div class="tree">
+<p><strong>Index</strong></p>
+<p><a href="Jenkins_Workshop_2.html">Jenkins Workshop 2</a></p>
+
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkins.html">Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Docker.html">Installation - Docker</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Apt.html">Installation - Apt</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Jar.html">Installation - Jar</a></li>
+<li><a href="Jenkins_Workshop_2--Welcome_To_Jenkins.html">Welcome To Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--NodeJS.html">NodeJS</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner.html">Jenkinsfile-runner</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--main.yml.html">main.yml</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--Jenkinsfile.html">Jenkinsfile</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--django.html">django</a></li>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions.html">nodejs - GitHub Actions</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions--node.js.yml.html">node.js.yml</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--PHP.html">PHP</a></li>
+<li><a href="Jenkins_Workshop_2--Building_Docker_Image.html">Building Docker Image</a></li>
+<li><a href="Jenkins_Workshop_2--References.html">References</a></li>
+</ol></div>
+<div class="page"><h1><b><u>node.js.yml</u></b></h1>name: Node.js CI<br /><br />on:<br />  push:<br />    branches: [ master ]<br />  pull_request:<br />    branches: [ master ]<br /><br />jobs:<br />  build:<br /><br />    runs-on: ubuntu-latest<br /><br />    strategy:<br />      matrix:<br />        node-version: [10.x, 12.x, 14.x]<br /><br />    steps:<br />    - uses: actions/checkout@v2<br />    - name: Use Node.js ${{ matrix.node-version }}<br />      uses: actions/setup-node@v1<br />      with:<br />        node-version: ${{ matrix.node-version }}<br />    - run: npm ci<br />    - run: npm run build --if-present<br />    - run: npm test</div></div>
+</body></html>

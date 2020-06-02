@@ -1,0 +1,34 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Installation - Docker</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body><div class="main"><div class="tree">
+<p><strong>Index</strong></p>
+<p><a href="Jenkins_Workshop_2.html">Jenkins Workshop 2</a></p>
+
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkins.html">Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Docker.html">Installation - Docker</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Apt.html">Installation - Apt</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Jar.html">Installation - Jar</a></li>
+<li><a href="Jenkins_Workshop_2--Welcome_To_Jenkins.html">Welcome To Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--NodeJS.html">NodeJS</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner.html">Jenkinsfile-runner</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--main.yml.html">main.yml</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--Jenkinsfile.html">Jenkinsfile</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--django.html">django</a></li>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions.html">nodejs - GitHub Actions</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions--node.js.yml.html">node.js.yml</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--PHP.html">PHP</a></li>
+<li><a href="Jenkins_Workshop_2--Building_Docker_Image.html">Building Docker Image</a></li>
+<li><a href="Jenkins_Workshop_2--References.html">References</a></li>
+</ol></div>
+<div class="page"><h1><b><u>Installation - Docker</u></b></h1><strong>Remove Old Versions</strong><br />sudo apt-get remove docker docker-engine docker.io containerd runc<br /><br /><strong>Install Docker</strong><br />1. Update the apt package index and install packages to allow apt to use a repository over HTTPS:<br />sudo apt-get update<br /><br />2. Add Docker’s official GPG key<br />curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -<br /><br />3. sudo add-apt-repository \<br />   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \<br />   $(lsb_release -cs) \<br />   stable"<br /><br />4. sudo apt-get update<br /><br />5. sudo apt-get install docker-ce docker-ce-cli containerd.io<br /><br />6. sudo docker run hello-world<br /><br /><br /><strong>Once Docker is installed and Running</strong><br />#Command Found in many places - Won't Work<br /><span style="text-decoration:line-through;">sudo docker run --name jenkinsci -p 8080:8080 jenkins/jenkins:lts</span><br /><br />#Updated Command<br />sudo docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts<br /><br /><img src="images/73-1.png" alt="images/73-1.png" /><br /><br /><br /><strong>Browse to:</strong><br />http://localhost:8080<br /><br /><img src="images/73-2.png" alt="images/73-2.png" /></div></div>
+</body></html>

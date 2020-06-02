@@ -1,0 +1,34 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>main.yml</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body><div class="main"><div class="tree">
+<p><strong>Index</strong></p>
+<p><a href="Jenkins_Workshop_2.html">Jenkins Workshop 2</a></p>
+
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkins.html">Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Docker.html">Installation - Docker</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Apt.html">Installation - Apt</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Jar.html">Installation - Jar</a></li>
+<li><a href="Jenkins_Workshop_2--Welcome_To_Jenkins.html">Welcome To Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--NodeJS.html">NodeJS</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner.html">Jenkinsfile-runner</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--main.yml.html">main.yml</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--Jenkinsfile.html">Jenkinsfile</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--django.html">django</a></li>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions.html">nodejs - GitHub Actions</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions--node.js.yml.html">node.js.yml</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--PHP.html">PHP</a></li>
+<li><a href="Jenkins_Workshop_2--Building_Docker_Image.html">Building Docker Image</a></li>
+<li><a href="Jenkins_Workshop_2--References.html">References</a></li>
+</ol></div>
+<div class="page"><h1><b><u>main.yml</u></b></h1># This is a basic workflow to help you get started with Actions<br /><br />name: Jenkinsfile Runner Prepackaged<br /><br /># Controls when the action will run. Triggers the workflow on push or pull request<br /># events but only for the master branch<br />on: push<br />jobs:<br />  jenkinsfile-runner-prepackaged:<br />    runs-on: ubuntu-latest<br />    steps:<br />    - uses: actions/checkout@master<br />    - name: jenkinsfile-runner-prepackaged<br />      uses: jenkinsci/jenkinsfile-runner-github-actions/jenkinsfile-runner-prepackaged@master<br />      env:<br />        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</div></div>
+</body></html>

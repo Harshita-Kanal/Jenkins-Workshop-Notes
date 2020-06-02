@@ -1,0 +1,34 @@
+<!doctype html><html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Building Docker Image</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+<body><div class="main"><div class="tree">
+<p><strong>Index</strong></p>
+<p><a href="Jenkins_Workshop_2.html">Jenkins Workshop 2</a></p>
+
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkins.html">Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Docker.html">Installation - Docker</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Apt.html">Installation - Apt</a></li>
+<li><a href="Jenkins_Workshop_2--Installation_-_Jar.html">Installation - Jar</a></li>
+<li><a href="Jenkins_Workshop_2--Welcome_To_Jenkins.html">Welcome To Jenkins</a></li>
+<li><a href="Jenkins_Workshop_2--NodeJS.html">NodeJS</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner.html">Jenkinsfile-runner</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--main.yml.html">main.yml</a></li>
+<li><a href="Jenkins_Workshop_2--Jenkinsfile-runner--Jenkinsfile.html">Jenkinsfile</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--django.html">django</a></li>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions.html">nodejs - GitHub Actions</a></li>
+<ol>
+<li><a href="Jenkins_Workshop_2--nodejs_-_GitHub_Actions--node.js.yml.html">node.js.yml</a></li>
+</ol>
+<li><a href="Jenkins_Workshop_2--PHP.html">PHP</a></li>
+<li><a href="Jenkins_Workshop_2--Building_Docker_Image.html">Building Docker Image</a></li>
+<li><a href="Jenkins_Workshop_2--References.html">References</a></li>
+</ol></div>
+<div class="page"><h1><b><u>Building Docker Image</u></b></h1>What’s docker?<br />    Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications.<br /><br />Why pipeline?<br />    You can reuse everything you did, put your jenkins code inside git project, the change in pipeline is showed in “changes” inside job history<br /><br />What’s dockerhub?<br />    Dockerhub is a public docker registry to store your docker images inside. If you want a private registry, you can pay for it.<br /><br />What’s docker registy?<br />    Docker registry is a server to distribute versions of docker images.<br />    <br />    <br />    <img src="images/85-1.png" alt="images/85-1.png" /><br />    <br /><br /><strong>Add DockerhubCredentials in Jenkins</strong><br />Go to jenkins home, click on “credentials” and “(global)”.<br /><br /><br /><img src="images/85-2.png" alt="images/85-2.png" /><br /><br /><br /><br /><strong>Jenkins Pipeline</strong><br /><br />pipeline {<br />  environment {<br />    registry = "miteshgoplani/docker-test"<br />    registryCredential = 'dockerhub'<br />    dockerImage = ''<br />  }<br />  agent any<br />  tools {nodejs "node" }<br />  stages {<br />    stage('Cloning Git') {<br />      steps {<br />        git 'https://github.com/miteshgoplani/jenkinsNodeTest.git'<br />      }<br />    }<br />    stage('Build') {<br />       steps {<br />         sh 'npm install'<br />       }<br />    }<br />    stage('Test') {<br />      steps {<br />        sh 'npm test'<br />      }<br />    }<br />    stage('Building image') {<br />      steps{<br />        script {<br />          dockerImage = docker.build registry + ":$BUILD_NUMBER"<br />        }<br />      }<br />    }<br />    stage('Deploy Image') {<br />      steps{<br />         script {<br />            docker.withRegistry( '', registryCredential ) {<br />            dockerImage.push()<br />          }<br />        }<br />      }<br />    }<br />    stage('Remove Unused docker image') {<br />      steps{<br />        sh "docker rmi $registry:$BUILD_NUMBER"<br />      }<br />    }<br />  }<br />}<br /><br /><br /><br />    <br />    <br />    </div></div>
+</body></html>
